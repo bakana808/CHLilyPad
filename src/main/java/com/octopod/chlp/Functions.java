@@ -19,6 +19,8 @@ import lilypad.client.connect.api.result.Result;
 import lilypad.client.connect.api.result.StatusCode;
 
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Octopod
@@ -110,11 +112,11 @@ public class Functions {
     }
 
     @api
-    public static class lp_message extends CHLPFunction {
+    public static class lp_message_send extends CHLPFunction {
 
         @Override
         public String getName() {
-            return "lp_message";
+            return "lp_message_send";
         }
 
         @Override
@@ -122,21 +124,30 @@ public class Functions {
         {
             Connect connection = getConnection(t);
 
-            String username = args[0].val();
+            List<String> servers = new ArrayList<>();
+
             String channel = args[1].val();
             String message = args[2].val();
+
+            if(args[0] instanceof CArray) {
+                for(Construct c: ((CArray)args[0]).asList()) {
+                    servers.add(c.val());
+                }
+            } else {
+                servers.add(args[0].val());
+            }
 
             MessageRequest request;
 
             try {
-                request = new MessageRequest(username, channel, message);
+                request = new MessageRequest(servers, channel, message);
             } catch (UnsupportedEncodingException e) {
                 throw new ConfigRuntimeException("Unable to encode message", ExceptionType.CastException, t);
             }
 
             sendRequest(connection, request, t);
 
-            return CVoid.GenerateCVoid(t);
+            return CVoid.VOID;
         }
 
         @Override
@@ -146,7 +157,48 @@ public class Functions {
 
         @Override
         public String docs() {
-            return "void {username, channel, message} Sends a message through LilyPad to another server by username.";
+            return "void {username, channel, message | usernames, channel, message} Sends a message through LilyPad to another server by username.";
         }
     }
+
+    @api
+    public static class lp_message_broadcast extends CHLPFunction {
+
+        @Override
+        public String getName() {
+            return "lp_message_broadcast";
+        }
+
+        @Override
+        public Construct exec(Target t, Environment env, Construct... args) throws ConfigRuntimeException
+        {
+            Connect connection = getConnection(t);
+
+            String channel = args[0].val();
+            String message = args[1].val();
+
+            MessageRequest request;
+
+            try {
+                request = new MessageRequest((String)null, channel, message);
+            } catch (UnsupportedEncodingException e) {
+                throw new ConfigRuntimeException("Unable to encode message", ExceptionType.CastException, t);
+            }
+
+            sendRequest(connection, request, t);
+
+            return CVoid.VOID;
+        }
+
+        @Override
+        public Integer[] numArgs() {
+            return new Integer[]{2};
+        }
+
+        @Override
+        public String docs() {
+            return "void {channel, message} Sends a message through LilyPad to every server.";
+        }
+    }
+
 }
