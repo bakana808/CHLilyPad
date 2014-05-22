@@ -18,7 +18,6 @@ import com.laytonsmith.core.events.Driver;
 import com.laytonsmith.core.events.EventUtils;
 import com.laytonsmith.core.exceptions.EventException;
 import com.laytonsmith.core.exceptions.PrefilterNonMatchException;
-import com.octopod.chlp.event.CHLPMessageEvent;
 
 import java.util.HashMap;
 import java.util.Map;

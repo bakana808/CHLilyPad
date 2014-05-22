@@ -1,4 +1,4 @@
-package com.octopod.chlp.event; /**
+package com.octopod.chlp; /**
  * @author Octopod
  *         Created on 5/21/14
  */

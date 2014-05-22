@@ -7,16 +7,9 @@ import com.laytonsmith.core.CHVersion;
 import com.laytonsmith.core.Static;
 import com.laytonsmith.core.constructs.*;
 import com.laytonsmith.core.environments.Environment;
-import com.laytonsmith.core.events.AbstractEvent;
-import com.laytonsmith.core.events.BindableEvent;
-import com.laytonsmith.core.events.Driver;
-import com.laytonsmith.core.events.EventUtils;
 import com.laytonsmith.core.exceptions.ConfigRuntimeException;
-import com.laytonsmith.core.exceptions.EventException;
-import com.laytonsmith.core.exceptions.PrefilterNonMatchException;
 import com.laytonsmith.core.functions.AbstractFunction;
 import com.laytonsmith.core.functions.Exceptions.ExceptionType;
-import com.octopod.chlp.event.CHLPMessageEvent;
 import lilypad.client.connect.api.Connect;
 import lilypad.client.connect.api.request.Request;
 import lilypad.client.connect.api.request.RequestException;
@@ -26,8 +19,6 @@ import lilypad.client.connect.api.result.Result;
 import lilypad.client.connect.api.result.StatusCode;
 
 import java.io.UnsupportedEncodingException;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * @author Octopod
