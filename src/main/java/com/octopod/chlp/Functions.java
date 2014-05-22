@@ -1,15 +1,22 @@
-package com.octopod.chlp.functions;
+package com.octopod.chlp;
 
+import com.laytonsmith.PureUtilities.Version;
 import com.laytonsmith.abstraction.MCPlayer;
 import com.laytonsmith.annotations.api;
+import com.laytonsmith.core.CHVersion;
 import com.laytonsmith.core.Static;
-import com.laytonsmith.core.constructs.CVoid;
-import com.laytonsmith.core.constructs.Construct;
-import com.laytonsmith.core.constructs.Target;
+import com.laytonsmith.core.constructs.*;
 import com.laytonsmith.core.environments.Environment;
+import com.laytonsmith.core.events.AbstractEvent;
+import com.laytonsmith.core.events.BindableEvent;
+import com.laytonsmith.core.events.Driver;
+import com.laytonsmith.core.events.EventUtils;
 import com.laytonsmith.core.exceptions.ConfigRuntimeException;
+import com.laytonsmith.core.exceptions.EventException;
+import com.laytonsmith.core.exceptions.PrefilterNonMatchException;
+import com.laytonsmith.core.functions.AbstractFunction;
 import com.laytonsmith.core.functions.Exceptions.ExceptionType;
-import com.octopod.chlp.CHLilyPad;
+import com.octopod.chlp.event.CHLPMessageEvent;
 import lilypad.client.connect.api.Connect;
 import lilypad.client.connect.api.request.Request;
 import lilypad.client.connect.api.request.RequestException;
@@ -19,12 +26,37 @@ import lilypad.client.connect.api.result.Result;
 import lilypad.client.connect.api.result.StatusCode;
 
 import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author Octopod
  *         Created on 5/21/14
  */
 public class Functions {
+
+    public static abstract class CHLPFunction extends AbstractFunction {
+
+        @Override
+        public ExceptionType[] thrown() {
+            return new ExceptionType[0];
+        }
+
+        @Override
+        public boolean isRestricted() {
+            return false;
+        }
+
+        @Override
+        public Boolean runAsync() {
+            return false;
+        }
+
+        @Override
+        public Version since() {
+            return CHVersion.V3_3_1;
+        }
+    }
 
     private static Connect getConnection(Target t)
     {

@@ -1,4 +1,9 @@
-package com.octopod.chlp.event;
+package com.octopod.chlp;
+
+/**
+ * @author Octopod
+ *         Created on 5/22/14
+ */
 
 import com.laytonsmith.PureUtilities.Version;
 import com.laytonsmith.annotations.api;
@@ -13,6 +18,7 @@ import com.laytonsmith.core.events.Driver;
 import com.laytonsmith.core.events.EventUtils;
 import com.laytonsmith.core.exceptions.EventException;
 import com.laytonsmith.core.exceptions.PrefilterNonMatchException;
+import com.octopod.chlp.event.CHLPMessageEvent;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -94,7 +100,5 @@ public class Events {
         public Version since() {
             return CHVersion.V3_3_1;
         }
-
     }
-
 }

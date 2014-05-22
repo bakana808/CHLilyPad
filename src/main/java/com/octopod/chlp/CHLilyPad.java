@@ -5,7 +5,6 @@ import com.laytonsmith.PureUtilities.Version;
 import com.laytonsmith.commandhelper.CommandHelperPlugin;
 import com.laytonsmith.core.extensions.AbstractExtension;
 import com.laytonsmith.core.extensions.MSExtension;
-import com.octopod.chlp.event.Events;
 import lilypad.client.connect.api.Connect;
 import lilypad.client.connect.api.event.EventListener;
 import lilypad.client.connect.api.event.MessageEvent;
