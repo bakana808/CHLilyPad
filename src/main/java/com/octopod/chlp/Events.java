@@ -92,6 +92,11 @@ public class Events {
             return true;
         }
 
+        @Override
+        public BindableEvent convert(CArray array, Target t) {
+            return new CHLPMessageEvent(array.get("sender", t).val(), array.get("channel", t).val(), array.get("message", t).val());
+        }
+
         public boolean modifyEvent(String key, Construct value, BindableEvent event) {
             return false;
         }
