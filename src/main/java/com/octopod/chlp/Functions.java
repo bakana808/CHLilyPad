@@ -71,7 +71,7 @@ public class Functions {
             throw new ConfigRuntimeException("Unable to send request to LilyPad", ExceptionType.PluginInternalException, t);
         }
 
-        if(result.getStatusCode() != StatusCode.SUCCESS) {
+        if(result != null && result.getStatusCode() != StatusCode.SUCCESS) {
             throw new ConfigRuntimeException("An error has occured while sending this request", ExceptionType.PluginInternalException, t);
         }
         return result;
@@ -123,7 +123,6 @@ public class Functions {
         public Construct exec(Target t, Environment env, Construct... args) throws ConfigRuntimeException
         {
             Connect connection = getConnection(t);
-
             List<String> servers = new ArrayList<>();
 
             String channel = args[1].val();
